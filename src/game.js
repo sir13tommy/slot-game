@@ -4,6 +4,11 @@ import SlotMachine from './slot-machine'
 import SlotMachineView from './slot-machine-view'
 
 function gameStart () {
+
+  // Some Map Data
+  const totalMoney = 400
+  const spinCost = 50
+
   const app = new PIXI.Application({
     transparent: true,
     antialias: true,
@@ -14,7 +19,13 @@ function gameStart () {
   const views = []
 
   const slotMachine = new SlotMachine(0, 6)
-  const slotMachineView = new SlotMachineView(app)
+  const slotMachineView = new SlotMachineView({
+    app,
+    onInput: () => {
+      let numbers = slotMachine.spin()
+      slotMachineView.rollTo(numbers)
+    }
+  })
   views.push(slotMachineView)
 
   // append our game to body
@@ -28,6 +39,13 @@ function gameStart () {
     let windowWidth = window.innerWidth
     let windowHeight = window.innerHeight
     app.renderer.resize(windowWidth, windowHeight)
+
+    // resize all views
+    views.forEach(view => {
+      if (typeof view.resize === 'function') {
+        view.resize(windowWidth, windowHeight)
+      }
+    })
   })
 
   // update views
@@ -37,7 +55,7 @@ function gameStart () {
 
     // update views
     views.forEach(view => {
-      if (view.hasOwnProperty('update') && typeof view.update === 'function') {
+      if (typeof view.update === 'function') {
         view.update(delta)
       }
     })
