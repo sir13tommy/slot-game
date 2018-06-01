@@ -1,16 +1,17 @@
-function spriteToButton (sprite, onclick, textureOver, textureDown, contentContainer) {
+function spriteToButton (sprite, onclick, ctx, textureOver, textureDown, contentContainer) {
   let texture = sprite.texture
 
   sprite.buttonMode = true
   sprite.interactive = true
 
+  ctx = ctx || null
   sprite.on('pointerdown', onButtonDown)
     .on('pointerup', onButtonUp)
     .on('pointerupoutside', onButtonUp)
     .on('pointerover', onButtonOver)
     .on('pointerout', onButtonOut)
-    .on('click', onclick)
-    .on('tap', onclick)
+    .on('click', onclick, ctx)
+    .on('tap', onclick, ctx)
 
   function onButtonDown () {
     this.isdown = true;

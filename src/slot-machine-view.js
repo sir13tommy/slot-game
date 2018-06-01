@@ -4,8 +4,8 @@ import utils from './utils'
 export default class {
   constructor (config) {
     this.app = config.app
-    this.onInput = config.onInput || null
-    this.onInputCtx = config.onInputCtx || null
+    this._onInput = config.onInput || null
+    this._onInputCtx = config.onInputCtx || null
 
     this.width = config.app.renderer.width
     this.height = config.app.renderer.height
@@ -59,7 +59,7 @@ export default class {
       container.addChild(mask)
       container.mask = mask
 
-      let spinTexture = PIXI.utils.TextureCache['BTN_SPIN.png']
+      let spinTexture = PIXI.utils.TextureCache['BTN_Spin.png']
       let spin = new PIXI.Sprite(spinTexture)
       spin.anchor.x = 0.5
       spin.anchor.y = 0.5
@@ -67,7 +67,7 @@ export default class {
       spin.position.set(873, 268)
       container.addChild(spin)
 
-      utils.spriteToButton(spin, this._handleInput(), spinTexture, spinTexture, spinTexture)
+      utils.spriteToButton(spin, this._handleInput, this, spinTexture, spinTexture, spinTexture)
 
       this._baseTileOffsetY = this.bg.height / 2 - this._itemSize.height / 2
       this._initCols()
@@ -82,8 +82,8 @@ export default class {
     if (this.inputLocked) {
       return
     }
-    if (this.onInput) {
-      this.onInput.call(this.onInputCtx || null)
+    if (this._onInput) {
+      this._onInput.call(this._onInputCtx || null)
     }
   }
 
@@ -109,24 +109,41 @@ export default class {
   }
 
   rollTo (nums) {
+    this.inputLocked = true
     let lastTween
     nums.forEach((num, idx) => {
       let col = this._cols[idx]
       if (!col) {
         return
       }
-      let currentOffsetY = col.tilePosition.y
 
       let step = this._itemSize.height + this._offset.y
-      let targetOffsetY = this._baseTileOffsetY + num * step
+      let targetOffsetY = this._baseTileOffsetY + (this._totalItems - num) * step
+
       let colRolling = PIXI.tweenManager.createTween(col.tilePosition)
-      colRolling.to({y: targetOffsetY})
+      colRolling.to({y: this._colSize.height * 10})
       colRolling.easing = PIXI.tween.Easing.linear()
-      colRolling.time = 400000
+      colRolling.delay = 50000 * idx
+      colRolling.time = 200000
+
+      let moveToItem = PIXI.tweenManager.createTween(col.tilePosition)
+      moveToItem.to({y: targetOffsetY})
+      moveToItem.easing = PIXI.tween.Easing.linear()
+      moveToItem.time = 200000
+
+      colRolling.on('end', () => {
+        col.tilePosition.y = 0
+        moveToItem.start()
+      })
+
       colRolling.start()
 
-      lastTween = colRolling
+      lastTween = moveToItem
     })
+
+    lastTween.on('end', () => {
+      this.inputLocked = false
+    }, this)
   }
 
   update () {
