@@ -121,14 +121,14 @@ export default class {
       let targetOffsetY = this._baseTileOffsetY + (this._totalItems - num) * step
 
       let colRolling = PIXI.tweenManager.createTween(col.tilePosition)
-      colRolling.to({y: this._colSize.height * 10})
-      colRolling.easing = PIXI.tween.Easing.linear()
+      colRolling.to({y: this._colSize.height * 20})
+      colRolling.easing = PIXI.tween.Easing.inSine()
       colRolling.delay = 50000 * idx
-      colRolling.time = 200000
+      colRolling.time = 600000
 
       let moveToItem = PIXI.tweenManager.createTween(col.tilePosition)
       moveToItem.to({y: targetOffsetY})
-      moveToItem.easing = PIXI.tween.Easing.linear()
+      moveToItem.easing = PIXI.tween.Easing.outSine()
       moveToItem.time = 200000
 
       colRolling.on('end', () => {
