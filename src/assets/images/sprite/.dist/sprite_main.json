@@ -1,0 +1,89 @@
+{
+	"meta": {
+		"image": "sprite_main.png",
+		"size": {"w":1170,"h":868},
+		"scale": "1"
+	},
+	"frames": {
+		"BG.png":
+		{
+			"frame": {"x":5,"y":5,"w":960,"h":536},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":960,"h":536},
+			"sourceSize": {"w":960,"h":536}
+		},
+		"Bet_Line.png":
+		{
+			"frame": {"x":5,"y":551,"w":770,"h":16},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":770,"h":16},
+			"sourceSize": {"w":770,"h":16}
+		},
+		"SYM1.png":
+		{
+			"frame": {"x":5,"y":577,"w":235,"h":155},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":235,"h":155},
+			"sourceSize": {"w":235,"h":155}
+		},
+		"SYM5.png":
+		{
+			"frame": {"x":250,"y":577,"w":206,"h":118},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":19,"y":22,"w":206,"h":118},
+			"sourceSize": {"w":235,"h":155}
+		},
+		"SYM7.png":
+		{
+			"frame": {"x":5,"y":742,"w":199,"h":121},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":20,"y":16,"w":199,"h":121},
+			"sourceSize": {"w":235,"h":155}
+		},
+		"SYM6.png":
+		{
+			"frame": {"x":466,"y":577,"w":193,"h":113},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":15,"y":21,"w":193,"h":113},
+			"sourceSize": {"w":235,"h":155}
+		},
+		"SYM4.png":
+		{
+			"frame": {"x":975,"y":5,"w":190,"h":141},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":22,"y":9,"w":190,"h":141},
+			"sourceSize": {"w":235,"h":155}
+		},
+		"SYM3.png":
+		{
+			"frame": {"x":975,"y":156,"w":178,"h":139},
+			"rotated": false,
+			"trimmed": true,
+			"spriteSourceSize": {"x":31,"y":7,"w":178,"h":139},
+			"sourceSize": {"w":235,"h":155}
+		},
+		"BTN_Spin.png":
+		{
+			"frame": {"x":975,"y":305,"w":98,"h":98},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":98,"h":98},
+			"sourceSize": {"w":98,"h":98}
+		},
+		"BTN_Spin_d.png":
+		{
+			"frame": {"x":975,"y":413,"w":98,"h":98},
+			"rotated": false,
+			"trimmed": false,
+			"spriteSourceSize": {"x":0,"y":0,"w":98,"h":98},
+			"sourceSize": {"w":98,"h":98}
+		}
+	}
+}
